@@ -62,13 +62,13 @@
                 if (node.id === "Cittadinanza Digitale") {
                     node.level = 1;
                 } else {
-                    const parentLink = graph.links.find(link => link.target.id === node.id);
-                    if (parentLink && parentLink.source.id === "Cittadinanza Digitale") {
+                    const parentLink = graph.links.find(link => link.target === node.id);
+                    if (parentLink && parentLink.source === "Cittadinanza Digitale") {
                         node.level = 2;
                         colorMap[node.id] = color(node.id);
                     } else if (parentLink) {
                         node.level = 3;
-                        node.parent = parentLink.source.id;
+                        node.parent = parentLink.source;
                     }
                 }
             });
@@ -90,13 +90,16 @@
                 .attr("fill", d => {
                     if (d.level === 1) return "#ff5733";
                     if (d.level === 2) return colorMap[d.id];
-                    if (d.level === 3) return d3.color(colorMap[d.parent]).brighter(1.5);
+                    if (d.level === 3) {
+                        const parentColor = d3.color(colorMap[d.parent]);
+                        return parentColor ? parentColor.brighter(1.5) : "#ccc";
+                    }
                 })
                 .call(d3.drag()
                     .on("start", dragstarted)
                     .on("drag", dragged)
                     .on("end", dragended))
-                .on("click", d => {
+                .on("click", (event, d) => {
                     window.location.href = d.id + ".html"; // Apre una nuova pagina per il nodo cliccato
                 });
 
