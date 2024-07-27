@@ -8,7 +8,7 @@
         body {
             font-family: Arial, sans-serif;
             display: flex;
-            justify-content: center;
+            justify-content: flex-start;
             align-items: center;
             flex-direction: column;
             height: 100vh;
@@ -16,10 +16,10 @@
             background-color: #f0f0f0;
         }
         h1 {
-            margin: 20px 0;
+            margin: 10px 0;
         }
         svg {
-            border: 1px solid #ccc;
+            margin-top: 10px;
         }
         .node {
             stroke: #fff;
@@ -42,7 +42,7 @@
 </head>
 <body>
     <h1>Mappa delle Competenze della Cittadinanza Digitale</h1>
-    <svg width="960" height="600"></svg>
+    <svg width="800" height="600"></svg>
     <script>
         const svg = d3.select("svg"),
             width = +svg.attr("width"),
@@ -51,7 +51,7 @@
         const color = d3.scaleOrdinal(d3.schemeCategory10);
 
         const simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(d => d.id).distance(150))
+            .force("link", d3.forceLink().id(d => d.id).distance(100))
             .force("charge", d3.forceManyBody().strength(-300))
             .force("center", d3.forceCenter(width / 2, height / 2))
             .force("collision", d3.forceCollide().radius(20));
