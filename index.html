@@ -13,13 +13,21 @@
         h1 {
             margin: 10px;
             font-size: 18px;
+            color: #2c3e50; /* Colore del titolo */
+            position: absolute;
+            top: 60px; /* Spostiamo il titolo verso il basso per fare spazio all'immagine */
+            left: 10px;
+        }
+        #logo {
             position: absolute;
             top: 10px;
             left: 10px;
+            width: 40px; /* Dimensione del logo */
+            height: auto;
         }
         svg {
             display: block;
-            margin: 60px auto 0;
+            margin: 100px auto 0; /* Spazio per il logo e il titolo */
         }
         .node {
             stroke: #fff;
@@ -41,6 +49,7 @@
     </style>
 </head>
 <body>
+    <img id="logo" src="logo.png" alt="Logo">
     <h1>Mappa delle Competenze della Cittadinanza Digitale</h1>
     <svg width="1000" height="800"></svg>
     <script>
