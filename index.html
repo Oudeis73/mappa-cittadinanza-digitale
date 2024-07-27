@@ -51,10 +51,11 @@
         const color = d3.scaleOrdinal(d3.schemeCategory10);
 
         const simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(d => d.id).distance(120))
-            .force("charge", d3.forceManyBody().strength(-400))
+            .force("link", d3.forceLink().id(d => d.id).distance(100))
+            .force("charge", d3.forceManyBody().strength(-300))
             .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("collision", d3.forceCollide().radius(25));
+            .force("collision", d3.forceCollide().radius(20))
+            .force("radial", d3.forceRadial(d => d.level * 150, width / 2, height / 2).strength(0.1));
 
         d3.json("data.json").then(function(graph) {
             const colorMap = {};
