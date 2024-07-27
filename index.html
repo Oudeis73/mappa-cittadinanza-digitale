@@ -15,8 +15,8 @@
             font-size: 18px;
             color: #4c4c4c; /* Colore più chiaro per il titolo */
             position: absolute;
-            top: 30px; /* Spostiamo il titolo più in alto */
-            left: 60px;
+            top: 20px; /* Spostiamo il titolo più in alto */
+            left: 70px;
         }
         #logo {
             position: absolute;
@@ -27,7 +27,7 @@
         }
         svg {
             display: block;
-            margin: 80px auto 0; /* Spazio per il logo e il titolo */
+            margin: 70px auto 0; /* Spazio per il logo e il titolo */
         }
         .node {
             stroke: #fff;
@@ -61,10 +61,10 @@
 
         const simulation = d3.forceSimulation()
             .force("link", d3.forceLink().id(d => d.id).distance(80)) /* Distanza ridotta per compattare */
-            .force("charge", d3.forceManyBody().strength(-400)) /* Forza di repulsione aumentata */
+            .force("charge", d3.forceManyBody().strength(-300)) /* Forza di repulsione */
             .force("center", d3.forceCenter(width / 2, height / 2))
-            .force("collision", d3.forceCollide().radius(25)) /* Raggio di collisione aumentato */
-            .force("radial", d3.forceRadial(d => d.level * 120, width / 2, height / 2).strength(0.1));
+            .force("collision", d3.forceCollide().radius(20)) /* Raggio di collisione */
+            .force("radial", d3.forceRadial(d => d.level * 100, width / 2, height / 2).strength(0.1)); /* Distribuzione radiale */
 
         d3.json("data.json").then(function(graph) {
             const colorMap = {};
@@ -129,4 +129,44 @@
 
             simulation
                 .nodes(graph.nodes)
-               
+                .on("tick", ticked);
+
+            simulation.force("link")
+                .links(graph.links);
+
+            function ticked() {
+                link
+                    .attr("x1", d => d.source.x)
+                    .attr("y1", d => d.source.y)
+                    .attr("x2", d => d.target.x)
+                    .attr("y2", d => d.target.y);
+
+                node
+                    .attr("cx", d => d.x)
+                    .attr("cy", d => d.y);
+
+                text
+                    .attr("x", d => d.x)
+                    .attr("y", d => d.y);
+            }
+
+            function dragstarted(event, d) {
+                if (!event.active) simulation.alphaTarget(0.3).restart();
+                d.fx = d.x;
+                d.fy = d.y;
+            }
+
+            function dragged(event, d) {
+                d.fx = event.x;
+                d.fy = event.y;
+            }
+
+            function dragended(event, d) {
+                if (!event.active) simulation.alphaTarget(0);
+                d.fx = null;
+                d.fy = null;
+            }
+        });
+    </script>
+</body>
+</html>
