@@ -51,9 +51,10 @@
         const color = d3.scaleOrdinal(d3.schemeCategory10);
 
         const simulation = d3.forceSimulation()
-            .force("link", d3.forceLink().id(d => d.id).distance(100))
-            .force("charge", d3.forceManyBody().strength(-200))
-            .force("center", d3.forceCenter(width / 2, height / 2));
+            .force("link", d3.forceLink().id(d => d.id).distance(150))
+            .force("charge", d3.forceManyBody().strength(-300))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collision", d3.forceCollide().radius(20));
 
         d3.json("data.json").then(function(graph) {
             const colorMap = {};
@@ -115,12 +116,6 @@
                 .attr("x", 12)
                 .style("font-size", d => d.level === 1 ? "16px" : "12px")
                 .text(d => d.id);
-
-            // Inizializza le posizioni dei nodi
-            graph.nodes.forEach(node => {
-                node.x = width / 2 + Math.random() * 50 - 25;
-                node.y = height / 2 + Math.random() * 50 - 25;
-            });
 
             simulation
                 .nodes(graph.nodes)
