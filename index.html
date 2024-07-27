@@ -7,23 +7,19 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
-            flex-direction: column;
-            height: 100vh;
             margin: 0;
             background-color: #f0f0f0;
         }
         h1 {
-            margin: 10px 0;
+            margin: 10px;
             font-size: 18px;
             position: absolute;
             top: 10px;
             left: 10px;
         }
         svg {
-            margin-top: 50px;
+            display: block;
+            margin: 60px auto 0;
         }
         .node {
             stroke: #fff;
@@ -46,7 +42,7 @@
 </head>
 <body>
     <h1>Mappa delle Competenze della Cittadinanza Digitale</h1>
-    <svg width="800" height="600"></svg>
+    <svg width="1000" height="800"></svg>
     <script>
         const svg = d3.select("svg"),
             width = +svg.attr("width"),
