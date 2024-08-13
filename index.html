@@ -119,9 +119,11 @@
                     .on("drag", dragged)
                     .on("end", dragended))
                 .on("click", (event, d) => {
-                    window.location.href = d.id + ".html"; // Apre una nuova pagina per il nodo cliccato
+                    const fileName = d.id.replace(/\s+/g, '_') + ".html";
+                    window.location.href = fileName;
                 });
 
+            
             node.append("title")
                 .text(d => d.id);
 
