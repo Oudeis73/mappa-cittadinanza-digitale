@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Mappa delle Competenze della Cittadinanza Digitale</title>
     <script src="https://d3js.org/d3.v6.min.js"></script>
+    
     <style>
          @font-face {
             font-family: 'Avenir';
@@ -18,24 +19,20 @@
             background-color: #f0f0f0;
         }
         #logo {
-            position: centered;
-            width: 200px; /* Dimensione maggiore del logo */
-            height: auto;
-        }
-        
-        
-        h1 {
-            margin: 10px;
-            font-size: 22px;
-            color: #245f78; /* Colore più chiaro per il titolo */
-            font-family: 'Avenir', Arial, sans-serif; 
-            position: centered;
-        }
-       
-        svg {
-            display: block;
-            margin: 70px auto 0; /* Spazio per il logo e il titolo */
-        }
+    #logo {
+        width: 250px; /* Dimensione maggiore del logo */
+        height: auto;
+        margin-top: 20px;
+    }
+    h1 {
+        margin: 10px 0 20px; /* Riduci lo spazio sotto il titolo */
+        font-size: 22px;
+        color: #245f78; 
+        font-family: 'Avenir', Arial, sans-serif; 
+    }
+    svg {
+        display: block;
+        margin: 20px auto 0; /* Riduci lo spazio per il grafo */
         .node {
             stroke: #fff;
             stroke-width: 1.5px;
